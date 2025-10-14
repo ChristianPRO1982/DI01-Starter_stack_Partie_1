@@ -1,0 +1,405 @@
+{
+  "name": "INSERT JSON ORDERS",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "6a052e09-3378-4e12-8d6e-183f183423f6",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.fileName }}",
+                    "rightValue": ".json",
+                    "operator": {
+                      "type": "string",
+                      "operation": "endsWith"
+                    },
+                    "id": "01c6161c-4125-40c6-ab34-f013cd13dfa7"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ef6d5716-7b7a-41ba-9f30-827f9fff1fb1",
+                    "leftValue": "={{ $json.fileName }}",
+                    "rightValue": ".csv",
+                    "operator": {
+                      "type": "string",
+                      "operation": "endsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        448,
+        240
+      ],
+      "id": "0ec17b7a-9dc4-4a9c-8a48-326ea33f4914",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        896,
+        144
+      ],
+      "id": "cc6e9a77-68de-46b7-9f51-71b64501f745",
+      "name": "JSON"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        336
+      ],
+      "id": "7addadb3-c77e-4e3a-b520-f4fe600d7f73",
+      "name": "CSV"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input attendu: $input.first().json.data = tableau d'orders (comme ton exemple)\n// Sortie: une ligne par item avec tous les champs utiles\n\nconst orders = $input.first().json.data;\nconst flattened = [];\n\nfor (const order of orders) {\n  const {\n    order_id,\n    customer_id,\n    channel,\n    created_at,\n    payment_status,\n    items = []\n  } = order;\n\n  if (!Array.isArray(items) || items.length === 0) {\n    // S'il n'y a pas d'items, on sort quand même une ligne \"vide\"\n    flattened.push({\n      json: {\n        order_id,\n        customer_id,\n        channel,\n        created_at,\n        payment_status,\n        sku: null,\n        qty: 0,\n        unit_price: null,\n        // line_total: 0, // décommente si tu veux le total de ligne\n      }\n    });\n    continue;\n  }\n\n  for (const it of items) {\n    const qty = Number(it?.qty ?? 0);\n    const unit_price = Number(it?.unit_price ?? 0);\n    flattened.push({\n      json: {\n        order_id,\n        customer_id,\n        channel,\n        created_at,\n        payment_status,\n        sku: it?.sku ?? null,\n        qty,\n        unit_price,\n      }\n    });\n  }\n}\n\nreturn flattened;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        144
+      ],
+      "id": "204eecaf-18f0-499e-ad5f-ed467c633220",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "value": "di01",
+          "mode": "list",
+          "cachedResultName": "di01"
+        },
+        "table": {
+          "__rl": true,
+          "value": "order_items",
+          "mode": "list",
+          "cachedResultName": "order_items"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "order_id": "={{ $json.order_id }}",
+            "customer_id": "={{ $json.customer_id }}",
+            "channel": "={{ $json.channel }}",
+            "created_at": "={{ $json.created_at }}",
+            "payment_status": "={{ $json.payment_status }}",
+            "sku": "={{ $json.sku }}",
+            "qty": "={{ $json.qty }}",
+            "unit_price": "={{ $json.unit_price }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "line_id",
+              "displayName": "line_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "order_id",
+              "displayName": "order_id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "customer_id",
+              "displayName": "customer_id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "channel",
+              "displayName": "channel",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "payment_status",
+              "displayName": "payment_status",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sku",
+              "displayName": "sku",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "qty",
+              "displayName": "qty",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "unit_price",
+              "displayName": "unit_price",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "inserted_at",
+              "displayName": "inserted_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1344,
+        144
+      ],
+      "id": "2eb975c4-ac6c-4bb3-9c14-f2cdb0185c8b",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "0XocAbnEXuXcCGCw",
+          "name": "n8n DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fileSelector": "/files/input/*",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        224,
+        240
+      ],
+      "id": "7461a82c-bea3-43e5-ab6c-766a665f42de",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        672,
+        144
+      ],
+      "id": "9a0bcaa2-dbc0-4e31-bb1e-457a293e0702",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "command": "=mv /files/input/{{ $('Read/Write Files from Disk').item.json.fileName }} /files/done/"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        240
+      ],
+      "id": "4f44fa88-6c7a-4be2-a7ad-77168724faf6",
+      "name": "Execute Command"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JSON": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CSV": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "df197839-7fac-46a6-aa27-075aab8b8f9c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d49672cb188940cace6dee22037378458ab6621920e1e23051a450cbbff59ec8"
+  },
+  "id": "LG6HuNQlWXHgtXJS",
+  "tags": []
+}

@@ -1,0 +1,439 @@
+{
+  "name": "DI01 - init 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        160
+      ],
+      "id": "23e74ae6-a101-4c20-ad67-58817d9feac0",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/files/input/*",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        -288
+      ],
+      "id": "658ef4b9-174c-4c44-98dc-835e53b4cbcc",
+      "name": "vider input"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -432,
+        -288
+      ],
+      "id": "c26960ad-6dcc-447c-8288-3ffb76711e88",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        -352
+      ],
+      "id": "beb42a8e-7787-4ec1-a220-c4c8942590ff"
+    },
+    {
+      "parameters": {
+        "command": "=rm /files/input/{{$binary.data.fileName}}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        16,
+        -288
+      ],
+      "id": "9d475481-71d5-40ee-8762-af2652b57048",
+      "name": "Execute Command1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -432,
+        16
+      ],
+      "id": "15ae01dc-c27b-4280-9103-50b630fec61c",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me1",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        -64
+      ],
+      "id": "b73cab52-bba3-4bbb-be3e-ec1b5c2c7d65"
+    },
+    {
+      "parameters": {
+        "command": "=rm /files/done/{{$binary.data.fileName}}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        16,
+        16
+      ],
+      "id": "7879dd5b-eb06-4798-ae54-fda7f6b825de",
+      "name": "Execute Command2"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/files/done/*",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        16
+      ],
+      "id": "b57b5549-65a6-4823-81e3-55c8cb83d62c",
+      "name": "vider done"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/files/output/*",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        304
+      ],
+      "id": "275bf589-e16f-42d3-8eae-dd025f8b2ca4",
+      "name": "vider output"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -432,
+        304
+      ],
+      "id": "dddf26ed-b480-479b-9d7f-098a7c8ef6f6",
+      "name": "Loop Over Items2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me2",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        224
+      ],
+      "id": "77a63a53-a7bb-4cee-93ee-b51c888ef3d9"
+    },
+    {
+      "parameters": {
+        "command": "=rm /files/output/{{$binary.data.fileName}}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        16,
+        304
+      ],
+      "id": "041ce954-288b-44b6-b40b-160706eac80a",
+      "name": "Execute Command3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -432,
+        592
+      ],
+      "id": "84a3b444-a131-4c4d-a61f-df42b60d0ff0",
+      "name": "Loop Over Items3"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me3",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        512
+      ],
+      "id": "da6f6374-9777-476a-99ee-93fa20151692"
+    },
+    {
+      "parameters": {
+        "command": "=rm /files/error/{{$binary.data.fileName}}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        16,
+        592
+      ],
+      "id": "e8ad385b-57f2-4d8a-853c-8f4d4151f9ae",
+      "name": "Execute Command4"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/files/error/*",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        592
+      ],
+      "id": "62941831-73e4-45b3-9bfb-76ba0242b011",
+      "name": "vider error"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "vider input",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "vider done",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "vider output",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "vider error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "vider input": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Execute Command1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me1": {
+      "main": [
+        [
+          {
+            "node": "Execute Command2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "vider done": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "vider output": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Replace Me2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me2": {
+      "main": [
+        [
+          {
+            "node": "Execute Command3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items3": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Replace Me3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me3": {
+      "main": [
+        [
+          {
+            "node": "Execute Command4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command4": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "vider error": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8d7b0aa5-4a7e-44b8-a2be-d8b81623a3d6",
+  "meta": {
+    "instanceId": "d49672cb188940cace6dee22037378458ab6621920e1e23051a450cbbff59ec8"
+  },
+  "id": "wpwoSda87hG7TX74",
+  "tags": []
+}
