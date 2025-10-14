@@ -11,7 +11,10 @@ Starter stack pour Data Engineers - Partie 1
 
 ## pour la mise en route
 ```
-sudo chown -R 1000:1000 ./n8n_files
+sudo chown -R 1000:1000 ./n8n_data ./n8n_files
+# (optionnel, permissifs mais efficaces en dev)
+sudo find ./n8n_data -type d -exec chmod 700 {} \;
+sudo find ./n8n_data -type f -exec chmod 600 {} \;
 ```
 
 ```
