@@ -38,3 +38,8 @@ CREATE TABLE IF NOT EXISTS order_items (
 CREATE UNIQUE INDEX IF NOT EXISTS ux_order_items_natural
   ON order_items(order_id, sku, item_index);
 ```
+
+## accès à Postgres
+![Installation de DBeaver](installation_DBeaver.png)
+
+![Installation de N8N](Installation_N8N.png)
