@@ -1,6 +1,13 @@
 # DI01-Starter_stack_Partie_1
 Starter stack pour Data Engineers - Partie 1
 
+Veille :
+* partie1/Veille sur les types de sources en entreprise V1.md
+
+les deux fichiers de sortie sont :
+* partie2/daily_summary_2025-10-15.csv
+* partie2/output.db (SQLite)
+
 ## structure
 * n8n_data/
 * n8n_files/init
