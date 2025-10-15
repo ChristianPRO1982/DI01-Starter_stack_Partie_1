@@ -17,6 +17,9 @@ sudo find ./n8n_data -type d -exec chmod 700 {} \;
 sudo find ./n8n_data -type f -exec chmod 600 {} \;
 ```
 
+Le host pour postgres : `postgres`
+
+
 ```
 CREATE TABLE IF NOT EXISTS order_items (
   line_id       BIGSERIAL PRIMARY KEY,
