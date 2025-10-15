@@ -1,0 +1,73 @@
+{
+  "name": "auto INSERT JSON ORDERS",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "seconds",
+              "secondsInterval": 3
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "26db2d40-f6c9-409a-9e09-9b714d56423e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "vkS04SZVwOu4iYSX",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/vkS04SZVwOu4iYSX",
+          "cachedResultName": "INSERT JSON ORDERS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "15b8cc21-ae85-403c-9c19-aef596890e9c",
+      "name": "Call 'INSERT JSON ORDERS'"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Call 'INSERT JSON ORDERS'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e20553d4-2f72-450d-8d2c-a0d1d52e9cb3",
+  "meta": {
+    "instanceId": "bdb09622112d37b9fa9585d950e166cb8dacde51f5c6e73d6b18dbefc7052009"
+  },
+  "id": "wxd28CPLeo7ZroKh",
+  "tags": []
+}

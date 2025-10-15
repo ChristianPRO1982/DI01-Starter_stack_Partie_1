@@ -6,10 +6,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        0,
-        240
+        -672,
+        96
       ],
-      "id": "6a052e09-3378-4e12-8d6e-183f183423f6",
+      "id": "a7044d68-5e41-4178-8356-82a46ed6329f",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -67,10 +67,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        448,
-        240
+        -224,
+        96
       ],
-      "id": "0ec17b7a-9dc4-4a9c-8a48-326ea33f4914",
+      "id": "6cfc3b4c-a82f-40c0-88a3-93af0797b31e",
       "name": "Switch"
     },
     {
@@ -81,10 +81,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        896,
-        144
+        224,
+        0
       ],
-      "id": "cc6e9a77-68de-46b7-9f51-71b64501f745",
+      "id": "56a0700f-1ecb-4c6d-bbde-c1b3d8d6506e",
       "name": "JSON"
     },
     {
@@ -94,10 +94,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        1344,
-        336
+        672,
+        192
       ],
-      "id": "7addadb3-c77e-4e3a-b520-f4fe600d7f73",
+      "id": "600de0c6-7fbd-41c5-8595-516a5a3b60df",
       "name": "CSV"
     },
     {
@@ -107,10 +107,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1120,
-        144
+        448,
+        0
       ],
-      "id": "204eecaf-18f0-499e-ad5f-ed467c633220",
+      "id": "e204cd88-c22f-4b7e-80c2-445776340cd9",
       "name": "Code in JavaScript"
     },
     {
@@ -242,15 +242,15 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1344,
-        144
+        672,
+        0
       ],
-      "id": "2eb975c4-ac6c-4bb3-9c14-f2cdb0185c8b",
+      "id": "42109825-0305-4453-97e9-bc339ee87b16",
       "name": "Insert rows in a table",
       "credentials": {
         "postgres": {
-          "id": "0XocAbnEXuXcCGCw",
-          "name": "n8n DB"
+          "id": "qGTTPpL7AzOQdglT",
+          "name": "Postgres account"
         }
       }
     },
@@ -262,10 +262,10 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
       "position": [
-        224,
-        240
+        -448,
+        96
       ],
-      "id": "7461a82c-bea3-43e5-ab6c-766a665f42de",
+      "id": "eece1ec1-8d6e-4b18-acd1-d849ee09f53b",
       "name": "Read/Write Files from Disk"
     },
     {
@@ -273,10 +273,10 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        672,
-        144
+        0,
+        0
       ],
-      "id": "9a0bcaa2-dbc0-4e31-bb1e-457a293e0702",
+      "id": "77e63aeb-5450-4683-a712-d15a9222ed4a",
       "name": "Limit"
     },
     {
@@ -286,10 +286,10 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        1568,
-        240
+        896,
+        96
       ],
-      "id": "4f44fa88-6c7a-4be2-a7ad-77168724faf6",
+      "id": "39381509-f98a-4cf4-bc82-99bdd922a594",
       "name": "Execute Command"
     }
   ],
@@ -395,11 +395,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "df197839-7fac-46a6-aa27-075aab8b8f9c",
+  "versionId": "ab976e77-2fcb-449b-90d4-efe8a9d40185",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "d49672cb188940cace6dee22037378458ab6621920e1e23051a450cbbff59ec8"
+    "instanceId": "bdb09622112d37b9fa9585d950e166cb8dacde51f5c6e73d6b18dbefc7052009"
   },
-  "id": "LG6HuNQlWXHgtXJS",
+  "id": "vkS04SZVwOu4iYSX",
   "tags": []
 }

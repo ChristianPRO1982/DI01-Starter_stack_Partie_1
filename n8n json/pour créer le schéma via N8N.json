@@ -1,0 +1,66 @@
+{
+  "name": "pour créer le schéma via N8N",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c04851f2-7290-4fe3-8d96-32898d6b3fe8",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        208,
+        0
+      ],
+      "id": "075611db-b1f0-4a9f-8554-51c2b6371adf",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "qGTTPpL7AzOQdglT",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0aad60f3-29fe-4cad-9dd1-6941260b59f2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bdb09622112d37b9fa9585d950e166cb8dacde51f5c6e73d6b18dbefc7052009"
+  },
+  "id": "TrDMtkd8dn35GjyA",
+  "tags": []
+}

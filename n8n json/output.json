@@ -1,0 +1,436 @@
+{
+  "name": "output",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        -96
+      ],
+      "id": "b867ae8d-d7ba-4914-8045-0094ca5d764c",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=/files/output/daily_summary_{{ $('Date & Time1').item.json.formattedDate }}.csv",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        992,
+        -384
+      ],
+      "id": "7d0d0187-3431-46e9-9bc8-55ac7f5000b5",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        768,
+        -384
+      ],
+      "id": "83a4e29e-8081-45d1-983f-bd66e9042156",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "di01",
+          "mode": "list",
+          "cachedResultName": "di01"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "daily_city_sales"
+        },
+        "limit": 2000,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        544,
+        -384
+      ],
+      "id": "cab61b68-5062-4079-8d49-c1ed26f872c0",
+      "name": "daily_city_sales",
+      "credentials": {
+        "postgres": {
+          "id": "qGTTPpL7AzOQdglT",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/files/output/orders_clean.csv",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        544,
+        0
+      ],
+      "id": "5c4c71f9-2933-482f-8cb8-b4f5099efb7e",
+      "name": "Read/Write Files from Disk1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        0
+      ],
+      "id": "297bee26-16b6-49cf-878b-b2a7f2dfa3ab",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/files/output/orders_rejected.csv",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        544,
+        192
+      ],
+      "id": "bda047c3-035d-4d93-874e-eb2820a40ddd",
+      "name": "Read/Write Files from Disk2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        192
+      ],
+      "id": "8e10589d-9f46-465a-95af-1f258bb25cf6",
+      "name": "Convert to File2"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "di01",
+          "mode": "list",
+          "cachedResultName": "di01"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "orders_clean"
+        },
+        "limit": 2000,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        96,
+        0
+      ],
+      "id": "4a71c069-ad84-4dbf-a8a6-c7ebdbf0a364",
+      "name": "orders_clean",
+      "credentials": {
+        "postgres": {
+          "id": "qGTTPpL7AzOQdglT",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "di01",
+          "mode": "list",
+          "cachedResultName": "di01"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "orders_rejected"
+        },
+        "limit": 2000,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        96,
+        192
+      ],
+      "id": "8c784e0f-6859-433e-8bcc-1475376e3fdd",
+      "name": "orders_rejected",
+      "credentials": {
+        "postgres": {
+          "id": "qGTTPpL7AzOQdglT",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        96,
+        -384
+      ],
+      "id": "7d2ef9a2-dba2-4904-b853-e5fe6d0d57c0",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "yyyy-MM-dd",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        320,
+        -384
+      ],
+      "id": "5658e4a1-6d82-47cf-9ead-1e1e58690995",
+      "name": "Date & Time1"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/files/output/daily_city_sales.csv",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -192
+      ],
+      "id": "b1b1f5fc-628e-4a22-afd8-57b73cea552b",
+      "name": "Read/Write Files from Disk3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        -192
+      ],
+      "id": "aa92ae9d-158d-4185-bb0b-78416fa42754",
+      "name": "Convert to File3"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "di01",
+          "mode": "list",
+          "cachedResultName": "di01"
+        },
+        "table": {
+          "__rl": true,
+          "value": "daily_city_sales",
+          "mode": "list",
+          "cachedResultName": "daily_city_sales"
+        },
+        "limit": 2000,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        96,
+        -192
+      ],
+      "id": "396c59a3-a4a6-4909-9629-a3c2fe8eebf8",
+      "name": "daily_city_sales1",
+      "credentials": {
+        "postgres": {
+          "id": "qGTTPpL7AzOQdglT",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "orders_clean",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "orders_rejected",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "daily_city_sales1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "daily_city_sales": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File2": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "orders_clean": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "orders_rejected": {
+      "main": [
+        [
+          {
+            "node": "Convert to File2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time1": {
+      "main": [
+        [
+          {
+            "node": "daily_city_sales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File3": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "daily_city_sales1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a08114a0-31fe-4f96-9a23-1a6d991d0adf",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bdb09622112d37b9fa9585d950e166cb8dacde51f5c6e73d6b18dbefc7052009"
+  },
+  "id": "B56ZkZGX3lwALTvT",
+  "tags": []
+}
