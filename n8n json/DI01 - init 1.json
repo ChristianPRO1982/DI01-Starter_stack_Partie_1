@@ -6,10 +6,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        0,
-        0
+        -96,
+        -208
       ],
-      "id": "abf87f2d-61a8-4279-87a9-7ed3aecf6d00",
+      "id": "06e56f3c-096a-4e06-8b76-31789f7d4cf3",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -20,10 +20,10 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
       "position": [
-        672,
-        0
+        576,
+        -208
       ],
-      "id": "6cfb31f7-30f2-4846-9d75-73195e026463",
+      "id": "a8c768b5-4778-4faa-8a0b-57b3ff41fae7",
       "name": "dossier init"
     },
     {
@@ -35,10 +35,10 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
       "position": [
-        896,
-        0
+        800,
+        -208
       ],
-      "id": "e4e71f93-f743-44fb-b8ef-29743ef20a8a",
+      "id": "34a65882-7bf7-4b50-82ad-225c73f1fc8e",
       "name": "Read/Write Files from Disk"
     },
     {
@@ -46,36 +46,104 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        448,
-        0
+        352,
+        -208
       ],
-      "id": "71c2ee51-7af2-4871-bf6e-c82031cf8c1b",
+      "id": "b2d8659e-8873-4d80-b3f4-2b896ddf148a",
       "name": "Limit"
     },
     {
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "BgEWYlRKwKpoZSDU",
+          "value": "yZBUMk0OBhqzSgjz",
           "mode": "list",
-          "cachedResultUrl": "/workflow/BgEWYlRKwKpoZSDU",
+          "cachedResultUrl": "/workflow/yZBUMk0OBhqzSgjz",
           "cachedResultName": "DI01 - init 2"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
-          "value": {}
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
         },
         "options": {}
       },
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        224,
-        0
+        128,
+        -208
       ],
-      "id": "2918014b-43b2-475e-a298-991c49e4b6fa",
+      "id": "68dbe6e8-8f8b-4359-a2d1-11774b0105ad",
       "name": "Call 'DI01 - init 2'",
       "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "order_items",
+          "mode": "list",
+          "cachedResultName": "order_items"
+        },
+        "deleteCommand": "delete",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1024,
+        -208
+      ],
+      "id": "8377e0fa-c9f2-4f0b-bf1b-6b643a551f2a",
+      "name": "Delete table or rows",
+      "credentials": {
+        "postgres": {
+          "id": "oMUtCNTBsPTMQ7AE",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "order_items_brut",
+          "mode": "list",
+          "cachedResultName": "order_items_brut"
+        },
+        "deleteCommand": "delete",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1248,
+        -208
+      ],
+      "id": "583c2452-4e3c-4d25-b6b8-46726aef644b",
+      "name": "Delete table or rows1",
+      "credentials": {
+        "postgres": {
+          "id": "oMUtCNTBsPTMQ7AE",
+          "name": "Postgres account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -123,16 +191,39 @@
           }
         ]
       ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Delete table or rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete table or rows": {
+      "main": [
+        [
+          {
+            "node": "Delete table or rows1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "2ea490f8-437d-4945-84b5-39b76b0835fa",
+  "versionId": "53a9eb2c-f12f-4c6a-947d-352fcf3167a4",
   "meta": {
-    "instanceId": "bdb09622112d37b9fa9585d950e166cb8dacde51f5c6e73d6b18dbefc7052009"
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4d2e6b2ab107c75a9aab86eb944284a674df6dc4b638051c83523375ca2b1092"
   },
-  "id": "rw51IzXfiPL19kyK",
+  "id": "GMQu8Qey8pixBHEW",
   "tags": []
 }

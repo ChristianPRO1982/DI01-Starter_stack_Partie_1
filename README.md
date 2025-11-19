@@ -44,6 +44,21 @@ CREATE TABLE IF NOT EXISTS order_items (
 
 CREATE UNIQUE INDEX IF NOT EXISTS ux_order_items_natural
   ON order_items(order_id, sku, item_index);
+
+CREATE TABLE public.order_items_brut (
+	line_id bigserial NOT NULL,
+	order_id text NOT NULL,
+	customer_id text NOT NULL,
+	channel text NOT NULL,
+	created_at timestamp NOT NULL,
+	payment_status text NOT NULL,
+	sku text NOT NULL,
+	qty int4 NOT NULL,
+	unit_price numeric(10, 2) NOT NULL,
+	item_index int4 DEFAULT 1 NOT NULL,
+	inserted_at timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT order_items_brut_pkey PRIMARY KEY (line_id)
+);
 ```
 
 ## accès à Postgres

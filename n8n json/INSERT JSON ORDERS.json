@@ -6,10 +6,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -672,
-        96
+        -864,
+        -160
       ],
-      "id": "a7044d68-5e41-4178-8356-82a46ed6329f",
+      "id": "43831f99-a409-4de7-9e88-1153532b57cc",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -67,10 +67,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -224,
-        96
+        -416,
+        -160
       ],
-      "id": "6cfc3b4c-a82f-40c0-88a3-93af0797b31e",
+      "id": "591079c6-ce71-46bb-84f0-fcec3a2e5f2c",
       "name": "Switch"
     },
     {
@@ -81,10 +81,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        224,
-        0
+        32,
+        -256
       ],
-      "id": "56a0700f-1ecb-4c6d-bbde-c1b3d8d6506e",
+      "id": "b0f094cd-5864-40a2-adc1-45bce0d8a31c",
       "name": "JSON"
     },
     {
@@ -94,10 +94,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        672,
-        192
+        928,
+        -64
       ],
-      "id": "600de0c6-7fbd-41c5-8595-516a5a3b60df",
+      "id": "9851984d-540e-4b0d-9873-4d11bd1ee62d",
       "name": "CSV"
     },
     {
@@ -107,25 +107,25 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        448,
-        0
+        256,
+        -256
       ],
-      "id": "e204cd88-c22f-4b7e-80c2-445776340cd9",
+      "id": "082b0e4b-c556-43cb-8ce2-432b88182012",
       "name": "Code in JavaScript"
     },
     {
       "parameters": {
         "schema": {
           "__rl": true,
-          "value": "di01",
+          "value": "public",
           "mode": "list",
-          "cachedResultName": "di01"
+          "cachedResultName": "public"
         },
         "table": {
           "__rl": true,
-          "value": "order_items",
+          "value": "order_items_brut",
           "mode": "list",
-          "cachedResultName": "order_items"
+          "cachedResultName": "order_items_brut"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -242,14 +242,14 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        672,
-        0
+        480,
+        -256
       ],
-      "id": "42109825-0305-4453-97e9-bc339ee87b16",
+      "id": "fba9a381-50e8-4b1e-a4f0-921189c98733",
       "name": "Insert rows in a table",
       "credentials": {
         "postgres": {
-          "id": "qGTTPpL7AzOQdglT",
+          "id": "oMUtCNTBsPTMQ7AE",
           "name": "Postgres account"
         }
       }
@@ -262,10 +262,10 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
       "position": [
-        -448,
-        96
+        -640,
+        -160
       ],
-      "id": "eece1ec1-8d6e-4b18-acd1-d849ee09f53b",
+      "id": "111a52ed-d2c7-4645-9502-509a83370eac",
       "name": "Read/Write Files from Disk"
     },
     {
@@ -273,10 +273,10 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        0,
-        0
+        -192,
+        -256
       ],
-      "id": "77e63aeb-5450-4683-a712-d15a9222ed4a",
+      "id": "98af7f8a-c178-4345-9947-0f593e0560dd",
       "name": "Limit"
     },
     {
@@ -286,11 +286,43 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        896,
-        96
+        1152,
+        -160
       ],
-      "id": "39381509-f98a-4cf4-bc82-99bdd922a594",
+      "id": "10a94973-1c85-492b-9818-1d67ed0433a9",
       "name": "Execute Command"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        704,
+        -256
+      ],
+      "id": "e424d511-f0e6-42eb-b5aa-46a925e1eb72",
+      "name": "Limit1"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT order_id, MIN(customer_id), MIN(channel), MIN(created_at), MIN(payment_status), sku, SUM(qty), MAX(unit_price), item_index, MIN(inserted_at)\nFROM order_items_brut\nGROUP BY order_id, sku, item_index;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        928,
+        -256
+      ],
+      "id": "eb66cd65-7804-4ac9-87ac-c1adbe9097fe",
+      "name": "GROUP BY",
+      "credentials": {
+        "postgres": {
+          "id": "oMUtCNTBsPTMQ7AE",
+          "name": "Postgres account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -350,7 +382,7 @@
       "main": [
         [
           {
-            "node": "Execute Command",
+            "node": "Limit1",
             "type": "main",
             "index": 0
           }
@@ -389,17 +421,44 @@
           }
         ]
       ]
+    },
+    "Execute Command": {
+      "main": [
+        []
+      ]
+    },
+    "Limit1": {
+      "main": [
+        [
+          {
+            "node": "GROUP BY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GROUP BY": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "ab976e77-2fcb-449b-90d4-efe8a9d40185",
+  "versionId": "86b2019d-f8f4-4b74-b5df-527c928e9892",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "bdb09622112d37b9fa9585d950e166cb8dacde51f5c6e73d6b18dbefc7052009"
+    "instanceId": "4d2e6b2ab107c75a9aab86eb944284a674df6dc4b638051c83523375ca2b1092"
   },
-  "id": "vkS04SZVwOu4iYSX",
+  "id": "yOSuWMTvnylLRVOT",
   "tags": []
 }
