@@ -94,7 +94,7 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        928,
+        1152,
         -64
       ],
       "id": "9851984d-540e-4b0d-9873-4d11bd1ee62d",
@@ -286,7 +286,7 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        1152,
+        1376,
         -160
       ],
       "id": "10a94973-1c85-492b-9818-1d67ed0433a9",
@@ -306,7 +306,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT order_id, MIN(customer_id), MIN(channel), MIN(created_at), MIN(payment_status), sku, SUM(qty), MAX(unit_price), item_index, MIN(inserted_at)\nFROM order_items_brut\nGROUP BY order_id, sku, item_index;",
+        "query": "INSERT INTO order_items (order_id, customer_id, channel, created_at, payment_status, sku, qty, unit_price, item_index, inserted_at)\nSELECT order_id, MIN(customer_id), MIN(channel), MIN(created_at), MIN(payment_status), sku, SUM(qty), MAX(unit_price), item_index, MIN(inserted_at)\nFROM order_items_brut\nGROUP BY order_id, sku, item_index;",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -317,6 +317,37 @@
       ],
       "id": "eb66cd65-7804-4ac9-87ac-c1adbe9097fe",
       "name": "GROUP BY",
+      "credentials": {
+        "postgres": {
+          "id": "oMUtCNTBsPTMQ7AE",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "order_items_brut",
+          "mode": "list",
+          "cachedResultName": "order_items_brut"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1152,
+        -256
+      ],
+      "id": "5ca2e0f4-23d4-41e6-b8cf-dabfbec39bc9",
+      "name": "Delete table or rows",
       "credentials": {
         "postgres": {
           "id": "oMUtCNTBsPTMQ7AE",
@@ -442,6 +473,17 @@
       "main": [
         [
           {
+            "node": "Delete table or rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete table or rows": {
+      "main": [
+        [
+          {
             "node": "Execute Command",
             "type": "main",
             "index": 0
@@ -454,7 +496,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "86b2019d-f8f4-4b74-b5df-527c928e9892",
+  "versionId": "41671488-deca-4f88-a379-860befc4bab6",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "4d2e6b2ab107c75a9aab86eb944284a674df6dc4b638051c83523375ca2b1092"

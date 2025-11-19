@@ -1,5 +1,5 @@
 --sortie de toutes les commandes par oi.order_id, oi.created_at, c.city, oi.channel;
-CREATE OR REPLACE VIEW di01.orders_clean
+CREATE OR REPLACE VIEW orders_clean
 AS 
   select oi.order_id,
          oi.created_at date,
@@ -21,7 +21,7 @@ group by oi.order_id, oi.created_at, c.city, oi.channel;
 
 
 --sortie journalière par DATE(oi.created_at), c.city, oi.channel;
-CREATE OR REPLACE VIEW di01.daily_city_sales
+CREATE OR REPLACE VIEW daily_city_sales
 AS 
   select TO_CHAR(oi.created_at, 'YYYY-MM-DD') AS date,
          c.city,
@@ -42,7 +42,7 @@ group by TO_CHAR(oi.created_at, 'YYYY-MM-DD'), c.city, oi.channel;
 
 
 --sortie journalière par DATE(oi.created_at), c.city, oi.channel;
-CREATE OR REPLACE VIEW di01.orders_rejected
+CREATE OR REPLACE VIEW orders_rejected
 AS 
   select *
     from order_items oi

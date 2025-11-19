@@ -59,6 +59,23 @@ CREATE TABLE public.order_items_brut (
 	inserted_at timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT order_items_brut_pkey PRIMARY KEY (line_id)
 );
+
+CREATE TABLE public.customers (
+	customer_id varchar NULL,
+	first_name varchar NULL,
+	last_name varchar NULL,
+	email varchar NULL,
+	city varchar NULL,
+	is_active bool NULL
+);
+
+CREATE TABLE public.refunds (
+	refund_id varchar NULL,
+	order_id varchar NULL,
+	amount float8 NULL,
+	reason varchar NULL,
+	created_at varchar NULL
+);
 ```
 
 ## accès à Postgres

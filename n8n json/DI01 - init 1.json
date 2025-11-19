@@ -7,7 +7,7 @@
       "typeVersion": 1,
       "position": [
         -96,
-        -208
+        -112
       ],
       "id": "06e56f3c-096a-4e06-8b76-31789f7d4cf3",
       "name": "When clicking ‘Execute workflow’"
@@ -144,6 +144,31 @@
           "name": "Postgres account"
         }
       }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "dV2o6QBSEPGHFKaV",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/dV2o6QBSEPGHFKaV",
+          "cachedResultName": "DI01 - init 3"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        128,
+        -16
+      ],
+      "id": "57f65f0d-e4c8-4717-ba95-9b4122493136",
+      "name": "Call 'DI01 - init 3'",
+      "alwaysOutputData": true
     }
   ],
   "pinData": {},
@@ -153,6 +178,11 @@
         [
           {
             "node": "Call 'DI01 - init 2'",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call 'DI01 - init 3'",
             "type": "main",
             "index": 0
           }
@@ -213,13 +243,18 @@
           }
         ]
       ]
+    },
+    "Call 'DI01 - init 3'": {
+      "main": [
+        []
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "53a9eb2c-f12f-4c6a-947d-352fcf3167a4",
+  "versionId": "2ef477c7-6e20-4258-a9ab-c9286fb016a5",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "4d2e6b2ab107c75a9aab86eb944284a674df6dc4b638051c83523375ca2b1092"
